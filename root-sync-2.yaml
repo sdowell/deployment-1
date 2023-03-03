@@ -1,0 +1,19 @@
+apiVersion: configsync.gke.io/v1beta1
+kind: RootSync
+metadata:
+  name: root-sync-2
+  namespace: config-management-system
+  annotations:
+    notifications.configsync.gke.io/subscribe.on-sync-synced.github: ""
+spec:
+  sourceFormat: unstructured
+  git:
+    repo: https://github.com/sdowell/deployment-2
+    branch: main
+    auth: none
+  notificationConfig:
+    secretRef:
+      name: notification-secret
+    configmapRef:
+      name: notification-cm
+
